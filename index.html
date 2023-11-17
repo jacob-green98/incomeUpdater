@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="userInfoBtn" type="button">Click to Start Earning!</button>
+    <button id="resetBtn" type="button">Click to reset</button>
+
+    <!-- HTML element to display the timer -->
+    <div id="timer">00:00:00</div>
+
+    <script>
+        // userInfoBtn:
+        const myBtn = document.getElementById("userInfoBtn");
+
+        // listen for the event of a click, then run code inside function. The e inside the funciton is an pointer event, and give data about the click in the console.
+        myBtn.addEventListener("click", function(e) {
+            console.log("The button was clicked!");
+
+            // asks the user a question and stores their response (the value) inside a const called hourlyRate
+            const hourlyRate = prompt("How much money do you make per hour?");
+
+            console.log("The user makes " + hourlyRate + " per hour!");
+
+            
+            
+            document.body.innerHTML = "<h1>You make " + hourlyRate + " per hour!</h1>";
+        });
+
+        // Display a timer:  
+        // Set initial time to 0
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+
+        // Update the timer every second
+        const timerInterval = setInterval(updateTimer, 1000);
+
+        function updateTimer() {
+            seconds++;
+
+            if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+
+            if (minutes === 60) {
+                minutes = 0;
+                hours++;
+            }
+            }
+
+            // Format the time as HH:MM:SS
+            const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+
+            // Display the timer in the HTML element with id "timer"
+            document.getElementById("timer").innerText = formattedTime;
+        }
+
+        // Helper function to pad single-digit numbers with a leading zero
+        function pad(number) {
+            return (number < 10 ? "0" : "") + number;
+        }
+    </script>
+</body>
+</html>
